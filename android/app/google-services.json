@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "4371224702",
+    "project_id": "quizology-9fe7c",
+    "storage_bucket": "quizology-9fe7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4371224702:android:5d220252f80511169ea02f",
+        "android_client_info": {
+          "package_name": "eg.edu.miuegypt.csc422.quizology"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4371224702-l1qdp97kuknuvc469kg7dej7h9mup9dd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqBr2-Emk114vx40U11pcaRZDQiwUQL00"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4371224702-l1qdp97kuknuvc469kg7dej7h9mup9dd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
