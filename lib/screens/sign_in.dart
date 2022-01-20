@@ -56,7 +56,7 @@ class _LoginState extends State<Login> {
             return ("Enter your password");
           } else {
             if (!regExp.hasMatch(value)) {
-              return ("Enter valide password min 6 characters ");
+              return ("Enter a valid password");
             }
           }
         },

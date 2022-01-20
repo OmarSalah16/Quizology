@@ -9,7 +9,7 @@ class Quiz extends StatefulWidget
 {
   final List<Question> question;
   final Category category;
-  Quiz({required this.category,required this.question});
+  Quiz({required this.category, required this.question});
 
   @override
   _QuizState createState() => _QuizState();
@@ -39,7 +39,8 @@ class _QuizState extends State<Quiz>
       child: Scaffold
       (
         backgroundColor: Theme.of(context).primaryColor,
-        appBar: AppBar(
+        appBar: AppBar
+        (
           automaticallyImplyLeading: true,
           backgroundColor: Theme.of(context).primaryColor,
           title: Text(widget.category.name),

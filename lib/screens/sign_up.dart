@@ -39,7 +39,7 @@ class _RegisterationState extends State<RegisterationScreen>
           return ("Enter your first name");
         } else {
         if (!regExp.hasMatch(value)){
-          return ("Enter valid name (Min. 3 characters) ");
+          return ("Enter a valid name (Min. 3 characters) ");
         }
         return null;
         }
@@ -71,7 +71,7 @@ class _RegisterationState extends State<RegisterationScreen>
           return ("Enter your second name");
         } else {
         if (!regExp.hasMatch(value)) {
-          return ("Enter valid name (Min. 3 characters) ");
+          return ("Enter a valid name (Min. 3 characters) ");
         }
         return null;
         }
@@ -132,7 +132,7 @@ class _RegisterationState extends State<RegisterationScreen>
           return ("Enter your password");
         } else {
           if (!regExp.hasMatch(value)) {
-            return ("Enter valid password (Min. 6 characters) ");
+            return ("Enter a valid password (Min. 6 characters) ");
           }
         }
       },

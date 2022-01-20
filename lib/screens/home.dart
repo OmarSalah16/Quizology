@@ -27,8 +27,8 @@ class _HomeState extends State<Home>
           context: context,
           builder: (context) => AlertDialog
           (
-            title: Text(category.name,textAlign: TextAlign.center),
-            content: Options(category: category), //Toggles Options Menu
+            title: Text(category.name, textAlign: TextAlign.center),
+            content: Options(category: category), // Toggles Options Menu
           )
         );
       },
