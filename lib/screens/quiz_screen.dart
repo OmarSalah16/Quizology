@@ -161,7 +161,7 @@ class _QuizState extends State<Quiz>
     } else if (_currentIndex < (widget.question.length - 1)) {
       setState(() {_currentIndex++;});
     } else {
-      Navigator.push
+      Navigator.pushReplacement
       (
         context,
         MaterialPageRoute
