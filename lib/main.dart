@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:opentrivia_quiz_game_final/screens/home.dart';
-import 'package:opentrivia_quiz_game_final/screens/sign_in.dart';
 import 'screens/splash_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:opentrivia_quiz_game_final/services/local_notification_service.dart';
