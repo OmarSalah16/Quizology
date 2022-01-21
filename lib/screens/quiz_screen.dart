@@ -108,16 +108,16 @@ class _QuizState extends State<Quiz> {
                   ),
                 ),
                 SizedBox(height: 25.0),
-                Container(
-                  child: ElevatedButton(
-                    onPressed: () => speak(HtmlUnescape()
-                        .convert(widget.question[_currentIndex].question)),
-                    child: Text(
-                      'Listen to Question',
-                      style: TextStyle(),
-                    ),
+                Container
+                (
+                  child: ElevatedButton.icon(
+                    onPressed: () => speak(HtmlUnescape().convert(widget.question[_currentIndex].question)),
+                    style: ElevatedButton.styleFrom(primary: Colors.blue[700]),
+                    icon: Icon(Icons.volume_up),
+                    label: Text("Listen to Question"),
                   ),
                 ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                 Container(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.green),
