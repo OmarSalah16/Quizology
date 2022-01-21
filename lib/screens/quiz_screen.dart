@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:opentrivia_quiz_game_final/models/category.dart';
@@ -19,10 +20,19 @@ class _QuizState extends State<Quiz>
 {
   int _currentIndex = 0;
   final Map<int, dynamic> _answers = {};
+  final FlutterTts flutterTts = FlutterTts();
 
   @override
   Widget build(BuildContext context)
   {
+    Future speak(String text) async
+    {
+      await flutterTts.setLanguage("en-US");
+      await flutterTts.setVolume(1);
+      await flutterTts.setPitch(1);
+      await flutterTts.speak(text);
+    }
+
     Question question = widget.question[_currentIndex];
 
     final List<dynamic> options = question.incorrect_answer;
@@ -124,6 +134,20 @@ class _QuizState extends State<Quiz>
                 ),
 
                 SizedBox(height: 25.0),
+
+                Container
+                (
+                  child: ElevatedButton
+                  (
+                    onPressed: () => speak("Hello"),
+                    child: Text
+                    (
+                      'Listen to Question',
+                      style: TextStyle(),
+                    ),
+                  )
+                  ,
+                ),
 
                 Container
                 (
