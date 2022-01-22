@@ -17,7 +17,11 @@ class favorites extends StatefulWidget {
 
 class _favorites extends State<favorites> {
   Widget _buildList(int index) {
-    Category category = categories[index];
+    Category category = categories[
+        Provider.of<UserProvider>(context, listen: false)
+            .getUser
+            .favorites[index]];
+
     return MaterialButton(
         onPressed: () async {
           showDialog(
@@ -60,7 +64,10 @@ class _favorites extends State<favorites> {
           ),
           body: ListView.builder(
               physics: BouncingScrollPhysics(),
-              itemCount: categories.length,
+              itemCount: Provider.of<UserProvider>(context, listen: false)
+                  .getUser
+                  .favorites
+                  .length,
               itemBuilder: (context, index) => _buildList(index)),
         ));
   }
