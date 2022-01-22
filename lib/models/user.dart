@@ -5,12 +5,13 @@ class Users {
   late String lastName;
   late List<dynamic> favorites = [];
   late int currentcategory;
-  Users({
-    this.firstName = "",
-    this.lastName = "",
-    this.uid = "",
-    this.currentcategory = 0,
-  });
+  late String avatarurl = "";
+  Users(
+      {this.firstName = "",
+      this.lastName = "",
+      this.uid = "",
+      this.currentcategory = 0,
+      this.avatarurl = ""});
   Map<String, dynamic> toMap(Users user) {
     var data = Map<String, dynamic>();
 
@@ -19,6 +20,7 @@ class Users {
     data['lastName'] = user.lastName;
     data["email"] = user.email;
     data["favorites"] = [];
+
     return data;
   }
 }
