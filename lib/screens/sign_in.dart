@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors, unused_field, unused_local_variable, unnecessary_new, avoid_print, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:opentrivia_quiz_game_final/providers/user_provider.dart';
 import 'package:opentrivia_quiz_game_final/screens/home.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:opentrivia_quiz_game_final/screens/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -150,6 +152,7 @@ class _LoginState extends State<Login> {
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => Home())),
                 });
+        await Provider.of<UserProvider>(context, listen: false).readUser();
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
           case "invalid-email":

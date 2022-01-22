@@ -4,26 +4,24 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:opentrivia_quiz_game_final/models/category.dart';
 import 'package:opentrivia_quiz_game_final/providers/user_provider.dart';
 import 'package:opentrivia_quiz_game_final/screens/favorites.dart';
+import 'package:opentrivia_quiz_game_final/screens/home.dart';
 import 'package:opentrivia_quiz_game_final/screens/sign_in.dart';
 import 'package:opentrivia_quiz_game_final/widgets/options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatefulWidget {
+class favorites extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _favorites createState() => _favorites();
 }
 
-class _HomeState extends State<Home> {
+class _favorites extends State<favorites> {
   Widget _buildList(int index) {
     Category category = categories[index];
-    print(Provider.of<UserProvider>(context, listen: false).getUser.favorites);
+    var cat = Category;
+
     return MaterialButton(
         onPressed: () async {
-          Provider.of<UserProvider>(context, listen: false)
-              .getUser
-              .currentcategory = index;
-          //print(index);
           showDialog(
               barrierColor: Theme.of(context).primaryColor,
               context: context,
@@ -70,8 +68,16 @@ class _HomeState extends State<Home> {
                 title: const Text('Favourites',
                     style: TextStyle(fontSize: 20, color: Color(0xff393d4e))),
                 onTap: () {
+                  // Navigator.pushReplacement(
+                  // context, MaterialPageRoute(builder: (_) => favorites()));
+                },
+              ),
+              ListTile(
+                title: const Text('home',
+                    style: TextStyle(fontSize: 20, color: Color(0xff393d4e))),
+                onTap: () {
                   Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (_) => favorites()));
+                      context, MaterialPageRoute(builder: (_) => Home()));
                 },
               ),
             ],

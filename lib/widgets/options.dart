@@ -6,7 +6,10 @@ import 'package:opentrivia_quiz_game_final/api_provider/question_api.dart';
 import 'package:opentrivia_quiz_game_final/models/category.dart';
 import 'package:opentrivia_quiz_game_final/models/question.dart';
 import 'package:opentrivia_quiz_game_final/models/user.dart';
+import 'package:opentrivia_quiz_game_final/providers/user_provider.dart';
 import 'package:opentrivia_quiz_game_final/screens/quiz_screen.dart';
+import 'package:opentrivia_quiz_game_final/services/fire_store_services.dart';
+import 'package:provider/provider.dart';
 
 import 'custom_action_chip.dart';
 
@@ -22,7 +25,7 @@ class _OptionsState extends State<Options> {
   late int _noOfQuestion;
   late String _difficulty;
   late bool processing;
-
+  FireStoreServices fs = FireStoreServices();
   @override
   void initState() {
     _noOfQuestion = 10;
@@ -100,7 +103,64 @@ class _OptionsState extends State<Options> {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text('Add to Favorites?'), FavoriteWidget()],
+            children: [
+              Text('Add to Favorites?'),
+              if (!Provider.of<UserProvider>(context, listen: false)
+                  .getUser
+                  .favorites
+                  .contains(Provider.of<UserProvider>(context, listen: false)
+                      .getUser
+                      .currentcategory)) ...[
+                IconButton(
+                    icon: Icon(Icons.star),
+                    iconSize: 24.0,
+                    color: Colors.black,
+                    onPressed: () {
+                      setState(() {
+                        Provider.of<UserProvider>(context, listen: false)
+                            .getUser
+                            .favorites
+                            .add(Provider.of<UserProvider>(context,
+                                    listen: false)
+                                .getUser
+                                .currentcategory);
+                        fs.updatefavorites(
+                            Provider.of<UserProvider>(context, listen: false)
+                                .getUser
+                                .favorites);
+                      });
+                    }),
+              ] else ...[
+                IconButton(
+                  icon: Icon(Icons.star),
+                  iconSize: 24.0,
+                  color: Colors.red,
+                  onPressed: () {
+                    setState(() {
+                      if (Provider.of<UserProvider>(context, listen: false)
+                          .getUser
+                          .favorites
+                          .contains(
+                              Provider.of<UserProvider>(context, listen: false)
+                                  .getUser
+                                  .currentcategory)) {
+                        Provider.of<UserProvider>(context, listen: false)
+                            .getUser
+                            .favorites
+                            .remove(Provider.of<UserProvider>(context,
+                                    listen: false)
+                                .getUser
+                                .currentcategory);
+                        fs.updatefavorites(
+                            Provider.of<UserProvider>(context, listen: false)
+                                .getUser
+                                .favorites);
+                      }
+                    });
+                  },
+                )
+              ]
+            ],
           ),
           SizedBox(height: 20.0),
           Text('Select Total No of Question'),
