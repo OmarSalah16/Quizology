@@ -14,6 +14,23 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  void initState() {
+    isLogged();
+    super.initState();
+  }
+
+  isLogged() async {
+    try {
+      String? uid = FirebaseAuth.instance.currentUser!.uid;
+
+      await Provider.of<UserProvider>(context, listen: false).readUser();
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) => Home()));
+    } catch (e) {
+      print(e);
+    }
+  }
+
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController emailController = TextEditingController();

@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
           routes: {
             "login": (_) => SplashScreen(),
             "home": (_) => Home(),
+            "/favorites": (_) => favorites()
           },
         ));
   }

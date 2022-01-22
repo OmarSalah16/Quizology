@@ -7,6 +7,8 @@ import 'package:opentrivia_quiz_game_final/models/category.dart';
 import 'package:opentrivia_quiz_game_final/models/question.dart';
 import 'package:opentrivia_quiz_game_final/models/user.dart';
 import 'package:opentrivia_quiz_game_final/providers/user_provider.dart';
+import 'package:opentrivia_quiz_game_final/screens/favorites.dart';
+import 'package:opentrivia_quiz_game_final/screens/home.dart';
 import 'package:opentrivia_quiz_game_final/screens/quiz_screen.dart';
 import 'package:opentrivia_quiz_game_final/services/fire_store_services.dart';
 import 'package:provider/provider.dart';
@@ -162,6 +164,19 @@ class _OptionsState extends State<Options> {
               ]
             ],
           ),
+          IconButton(
+              icon: Icon(Icons.ac_unit),
+              iconSize: 24.0,
+              color: Colors.black,
+              onPressed: () {
+                setState(() {
+                  Provider.of<UserProvider>(context, listen: false)
+                      .getUser
+                      .favorites;
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => favorites()));
+                });
+              }),
           SizedBox(height: 20.0),
           Text('Select Total No of Question'),
           Wrap(alignment: WrapAlignment.center, spacing: 10.0, children: [
@@ -246,38 +261,5 @@ class _OptionsState extends State<Options> {
         ],
       ),
     );
-  }
-}
-
-class FavoriteWidget extends StatefulWidget {
-  @override
-  _FavoriteWidgetState createState() => _FavoriteWidgetState();
-}
-
-class _FavoriteWidgetState extends State<FavoriteWidget> {
-  bool _isFavorited = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IconButton(
-          onPressed: _toggleFavorite,
-          icon: _isFavorited ? Icon(Icons.star) : Icon(Icons.star_border),
-          color: Colors.red[500],
-        )
-      ],
-    );
-  }
-
-  _toggleFavorite() {
-    setState(() {
-      if (_isFavorited) {
-        _isFavorited = false;
-      } else {
-        _isFavorited = true;
-      }
-    });
   }
 }

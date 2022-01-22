@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   Widget _buildList(int index) {
     Category category = categories[index];
-    print(Provider.of<UserProvider>(context, listen: false).getUser.favorites);
+
     return MaterialButton(
         onPressed: () async {
           Provider.of<UserProvider>(context, listen: false)
@@ -52,9 +52,13 @@ class _HomeState extends State<Home> {
               child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              const DrawerHeader(
+              DrawerHeader(
                 decoration: BoxDecoration(color: Color(0xff393d4e)),
-                child: Text('Welcome, Guest.',
+                child: Text(
+                    'Welcome ,' +
+                        Provider.of<UserProvider>(context, listen: false)
+                            .getUser
+                            .firstName,
                     style: TextStyle(fontSize: 20, color: Colors.white)),
               ),
               ListTile(

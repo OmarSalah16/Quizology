@@ -24,6 +24,13 @@ class _favorites extends State<favorites> {
 
     return MaterialButton(
         onPressed: () async {
+          Provider.of<UserProvider>(context, listen: false)
+                  .getUser
+                  .currentcategory =
+              Provider.of<UserProvider>(context, listen: false)
+                  .getUser
+                  .favorites[index];
+
           showDialog(
               barrierColor: Theme.of(context).primaryColor,
               context: context,
