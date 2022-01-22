@@ -58,20 +58,20 @@ class _HomeState extends State<Home> {
                     style: TextStyle(fontSize: 20, color: Colors.white)),
               ),
               ListTile(
+                title: const Text('Favourites',
+                    style: TextStyle(fontSize: 20, color: Color(0xff393d4e))),
+                onTap: () {
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => favorites()));
+                },
+              ),
+              ListTile(
                 title: const Text('Sign Out',
                     style: TextStyle(fontSize: 20, color: Color(0xff393d4e))),
                 onTap: () {
                   signOut();
                   Navigator.pushReplacement(
                       context, MaterialPageRoute(builder: (_) => Login()));
-                },
-              ),
-              ListTile(
-                title: const Text('Favourites',
-                    style: TextStyle(fontSize: 20, color: Color(0xff393d4e))),
-                onTap: () {
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (_) => favorites()));
                 },
               ),
             ],

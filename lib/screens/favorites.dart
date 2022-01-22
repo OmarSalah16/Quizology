@@ -46,44 +46,15 @@ class _favorites extends State<favorites> {
           systemNavigationBarColor: Theme.of(context).primaryColor,
         ),
         child: Scaffold(
-          drawer: Drawer(
-              child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(color: Color(0xff393d4e)),
-                child: Text('Welcome, Guest.',
-                    style: TextStyle(fontSize: 20, color: Colors.white)),
-              ),
-              ListTile(
-                title: const Text('Sign Out',
-                    style: TextStyle(fontSize: 20, color: Color(0xff393d4e))),
-                onTap: () {
-                  signOut();
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (_) => Login()));
-                },
-              ),
-              ListTile(
-                title: const Text('Favourites',
-                    style: TextStyle(fontSize: 20, color: Color(0xff393d4e))),
-                onTap: () {
-                  // Navigator.pushReplacement(
-                  // context, MaterialPageRoute(builder: (_) => favorites()));
-                },
-              ),
-              ListTile(
-                title: const Text('home',
-                    style: TextStyle(fontSize: 20, color: Color(0xff393d4e))),
-                onTap: () {
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (_) => Home()));
-                },
-              ),
-            ],
-          )),
           backgroundColor: Theme.of(context).primaryColor,
           appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (_) => Home()));
+              },
+              icon: Icon(Icons.arrow_back),
+            ),
             backgroundColor: Theme.of(context).primaryColor,
             systemOverlayStyle: SystemUiOverlayStyle(
                 statusBarColor: Theme.of(context).primaryColor),
