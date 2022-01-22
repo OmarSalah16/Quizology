@@ -18,8 +18,6 @@ class favorites extends StatefulWidget {
 class _favorites extends State<favorites> {
   Widget _buildList(int index) {
     Category category = categories[index];
-    var cat = Category;
-
     return MaterialButton(
         onPressed: () async {
           showDialog(
