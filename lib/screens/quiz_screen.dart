@@ -5,6 +5,7 @@ import 'package:html_unescape/html_unescape.dart';
 import 'package:opentrivia_quiz_game_final/models/category.dart';
 import 'package:opentrivia_quiz_game_final/models/question.dart';
 import 'package:opentrivia_quiz_game_final/screens/result_screen.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 
 class Quiz extends StatefulWidget {
   final List<Question> question;
@@ -52,6 +53,30 @@ class _QuizState extends State<Quiz> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          borderRadius: new BorderRadius.circular(16.0),
+                          color: Colors.white),
+                      child: Row(
+                        children: [
+                          CountdownTimer(
+                            textStyle: TextStyle(fontSize: 25),
+                            onEnd: onEnd,
+                            endTime: DateTime.now().millisecondsSinceEpoch +
+                                1000 * 10,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -108,10 +133,10 @@ class _QuizState extends State<Quiz> {
                   ),
                 ),
                 SizedBox(height: 25.0),
-                Container
-                (
+                Container(
                   child: ElevatedButton.icon(
-                    onPressed: () => speak(HtmlUnescape().convert(widget.question[_currentIndex].question)),
+                    onPressed: () => speak(HtmlUnescape()
+                        .convert(widget.question[_currentIndex].question)),
                     style: ElevatedButton.styleFrom(primary: Colors.blue[700]),
                     icon: Icon(Icons.volume_up),
                     label: Text("Listen to Question"),
@@ -140,6 +165,44 @@ class _QuizState extends State<Quiz> {
         ),
       ),
     );
+  }
+
+  void onEnd() {
+    if (_currentIndex <
+        (widget.question.length - 1)) // If this isn't the last question
+    {
+      if (_answers[_currentIndex] == null) // If the answer is empty
+      {
+        Fluttertoast.showToast(
+          backgroundColor: Theme.of(context).primaryColor,
+          msg: 'You failed to answer this question in time.',
+          gravity: ToastGravity.BOTTOM,
+        );
+        _answers[_currentIndex] = "No Answer";
+      }
+
+      setState(() {
+        _currentIndex++;
+      });
+    } else //If this IS the last question
+    {
+      if (_answers[_currentIndex] == null) {
+        Fluttertoast.showToast(
+          backgroundColor: Theme.of(context).primaryColor,
+          msg: 'You failed to answer this question in time.',
+          gravity: ToastGravity.BOTTOM,
+        );
+        _answers[_currentIndex] = "No Answer";
+      }
+
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Result(
+                    answer: _answers,
+                    question: widget.question,
+                  )));
+    }
   }
 
   void _submit() {
