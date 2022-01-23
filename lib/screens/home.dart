@@ -93,6 +93,7 @@ class _HomeState extends State<Home>
                       Text(
                           'Welcome, ' + Provider.of<UserProvider>(context, listen: false).getUser.firstName,
                           style: TextStyle(fontSize: 20, color: Colors.white)),
+                      SizedBox(height: 10,),
                       GestureDetector(
                         onTap: () async {
                           try {

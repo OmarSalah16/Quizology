@@ -163,20 +163,19 @@ class _OptionsState extends State<Options> {
               ]
             ],
           ),
-          IconButton
+          ElevatedButton
           (
-              icon: Icon(Icons.stars_rounded),
-              iconSize: 24.0,
-              color: Colors.black,
-              onPressed: () {
-                setState(() {
-                  Provider.of<UserProvider>(context, listen: false)
-                      .getUser
-                      .favorites;
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (_) => favorites()));
+            child: Text("Go to Favorites"),
+            style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+              onPressed: ()
+              {
+                setState(()
+                {
+                  Provider.of<UserProvider>(context, listen: false).getUser.favorites;
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => favorites()));
                 });
-              }),
+              }
+          ),
           SizedBox(height: 20.0),
           Text('Select Total No of Question'),
           Wrap(alignment: WrapAlignment.center, spacing: 10.0, children: [
