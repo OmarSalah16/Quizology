@@ -5,13 +5,13 @@ class Users {
   late String lastName;
   late List<dynamic> favorites = [];
   late int currentcategory;
-  late String avatarurl = "";
+  late String avatarUrl = "";
   Users(
       {this.firstName = "",
       this.lastName = "",
       this.uid = "",
       this.currentcategory = 0,
-      this.avatarurl = ""});
+      this.avatarUrl = ""});
   Map<String, dynamic> toMap(Users user) {
     var data = Map<String, dynamic>();
 

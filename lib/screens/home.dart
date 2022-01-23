@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:opentrivia_quiz_game_final/models/category.dart';
 import 'package:opentrivia_quiz_game_final/providers/user_provider.dart';
 import 'package:opentrivia_quiz_game_final/screens/favorites.dart';
 import 'package:opentrivia_quiz_game_final/screens/sign_in.dart';
+import 'package:opentrivia_quiz_game_final/services/storage_service.dart';
 import 'package:opentrivia_quiz_game_final/widgets/options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +19,21 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  File? imageFile;
+  Future pickImage() async {
+    final picker = ImagePicker();
+    // ignore: deprecated_member_use
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      try {
+        imageFile = File(pickedFile!.path);
+        print("Image uploaded");
+      } catch (e) {
+        print(e);
+      }
+    });
+  }
+
   Widget _buildList(int index) {
     Category category = categories[index];
 
@@ -53,14 +72,44 @@ class _HomeState extends State<Home> {
             padding: EdgeInsets.zero,
             children: [
               DrawerHeader(
-                decoration: BoxDecoration(color: Color(0xff393d4e)),
-                child: Text(
-                    'Welcome ,' +
-                        Provider.of<UserProvider>(context, listen: false)
-                            .getUser
-                            .firstName,
-                    style: TextStyle(fontSize: 20, color: Colors.white)),
-              ),
+                  decoration: BoxDecoration(color: Color(0xff393d4e)),
+                  child: Column(
+                    children: [
+                      Text(
+                          'Welcome ,' +
+                              Provider.of<UserProvider>(context, listen: false)
+                                  .getUser
+                                  .firstName,
+                          style: TextStyle(fontSize: 20, color: Colors.white)),
+                      GestureDetector(
+                        onTap: () async {
+                          try {
+                            await pickImage();
+                            await StorageRepo().uploadFile(imageFile!);
+                            var url = await StorageRepo().getUserProfileImage(
+                                Provider.of<UserProvider>(context,
+                                        listen: false)
+                                    .getUser
+                                    .uid);
+                            setState(() {
+                              Provider.of<UserProvider>(context, listen: false)
+                                  .getUser
+                                  .avatarUrl = url;
+                            });
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              Provider.of<UserProvider>(context, listen: false)
+                                  .getUser
+                                  .avatarUrl),
+                          radius: MediaQuery.of(context).size.height / 16,
+                        ),
+                      ),
+                    ],
+                  )),
               ListTile(
                 title: const Text('Favourites',
                     style: TextStyle(fontSize: 20, color: Color(0xff393d4e))),
