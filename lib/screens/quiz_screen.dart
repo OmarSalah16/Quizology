@@ -67,7 +67,7 @@ class _QuizState extends State<Quiz> {
                             textStyle: TextStyle(fontSize: 25),
                             onEnd: onEnd,
                             endTime: DateTime.now().millisecondsSinceEpoch +
-                                1000 * 10,
+                                1000 * 20,
                           ),
                         ],
                       ),
