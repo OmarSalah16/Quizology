@@ -17,4 +17,8 @@ class UserProvider with ChangeNotifier {
     _user.favorites = data["favorites"];
     notifyListeners();
   }
+
+  destroyUser() {
+    _user = Users();
+  }
 }
