@@ -18,57 +18,72 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home>
+{
   File? imageFile;
-  Future pickImage() async {
+  Future pickImage() async
+  {
     final picker = ImagePicker();
     // ignore: deprecated_member_use
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      try {
+    setState(()
+    {
+      try
+      {
         imageFile = File(pickedFile!.path);
         print("Image uploaded");
-      } catch (e) {
+      } catch (e){
         print(e);
       }
     });
   }
 
-  Widget _buildList(int index) {
+  Widget _buildList(int index)
+  {
     Category category = categories[index];
 
-    return MaterialButton(
-        onPressed: () async {
-          Provider.of<UserProvider>(context, listen: false)
-              .getUser
-              .currentcategory = index;
-          //print(index);
-          showDialog(
-              barrierColor: Theme.of(context).primaryColor,
-              context: context,
-              builder: (context) => AlertDialog(
-                    title: Text(category.name, textAlign: TextAlign.center),
-                    content:
-                        Options(category: category), // Toggles Options Menu
-                  ));
-        },
-        color: Colors.white,
-        padding: EdgeInsets.all(10.0),
-        child: ListTile(
-            title:
-                Text(category.name, style: TextStyle(color: Color(0xff6C7C8D))),
-            leading: Icon(category.icon, color: Color(0xff6C7C8D))));
+    return MaterialButton
+    (
+      onPressed: () async
+      {
+        Provider.of<UserProvider>(context, listen: false).getUser.currentcategory = index;
+        //print(index);
+        showDialog
+        (
+          barrierColor: Theme.of(context).primaryColor,
+          context: context,
+          builder: (context) => AlertDialog
+          (
+            title: Text(category.name, textAlign: TextAlign.center),
+            content: Options(category: category), // Toggles Options Menu
+          )
+        );
+      },
+      color: Colors.white,
+      padding: EdgeInsets.all(10.0),
+      child: ListTile
+      (
+        title: Text(category.name, style: TextStyle(color: Color(0xff6C7C8D))),
+        leading: Icon(category.icon, color: Color(0xff6C7C8D))
+      ),
+    );
   }
 
   @override
-  Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle(
+  Widget build(BuildContext context)
+  {
+    return AnnotatedRegion<SystemUiOverlayStyle>
+    (
+        value: SystemUiOverlayStyle
+        (
           systemNavigationBarColor: Theme.of(context).primaryColor,
         ),
-        child: Scaffold(
-          drawer: Drawer(
-              child: ListView(
+        child: Scaffold
+        (
+          drawer: Drawer
+          (
+            child: ListView
+            (
             padding: EdgeInsets.zero,
             children: [
               DrawerHeader(
@@ -76,10 +91,7 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: [
                       Text(
-                          'Welcome ,' +
-                              Provider.of<UserProvider>(context, listen: false)
-                                  .getUser
-                                  .firstName,
+                          'Welcome, ' + Provider.of<UserProvider>(context, listen: false).getUser.firstName,
                           style: TextStyle(fontSize: 20, color: Colors.white)),
                       GestureDetector(
                         onTap: () async {

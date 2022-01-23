@@ -13,17 +13,16 @@ class CustomActionChip extends StatelessWidget
   });
 
   @override
-  Widget build(BuildContext context) {
-    return ActionChip(
-      label: Text(
+  Widget build(BuildContext context)
+  {
+    return ActionChip
+    (
+      label: Text
+      (
         name,
-        style: TextStyle(
-          color: Colors.white,
-        ),
+        style: TextStyle(color: Colors.white),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       backgroundColor: backGroundColor,
       onPressed: onPressed,
     );

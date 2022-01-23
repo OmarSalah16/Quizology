@@ -113,25 +113,24 @@ class _OptionsState extends State<Options> {
                   .contains(Provider.of<UserProvider>(context, listen: false)
                       .getUser
                       .currentcategory)) ...[
-                IconButton(
-                    icon: Icon(Icons.star),
-                    iconSize: 24.0,
-                    color: Colors.black,
-                    onPressed: () {
-                      setState(() {
-                        Provider.of<UserProvider>(context, listen: false)
-                            .getUser
-                            .favorites
-                            .add(Provider.of<UserProvider>(context,
-                                    listen: false)
-                                .getUser
-                                .currentcategory);
-                        fs.updatefavorites(
-                            Provider.of<UserProvider>(context, listen: false)
-                                .getUser
-                                .favorites);
-                      });
-                    }),
+                IconButton
+                (
+                  icon: Icon(Icons.star),
+                  iconSize: 24.0,
+                  color: Colors.black,
+                  onPressed: ()
+                  {
+                    setState(()
+                    {
+                      Provider.of<UserProvider>(context, listen: false).getUser.favorites.add(Provider.of<UserProvider>
+                      (
+                        context,
+                        listen: false
+                      ).getUser.currentcategory);
+                      fs.updatefavorites(Provider.of<UserProvider>(context, listen: false).getUser.favorites);
+                    });
+                  }
+                ),
               ] else ...[
                 IconButton(
                   icon: Icon(Icons.star),
@@ -164,8 +163,9 @@ class _OptionsState extends State<Options> {
               ]
             ],
           ),
-          IconButton(
-              icon: Icon(Icons.ac_unit),
+          IconButton
+          (
+              icon: Icon(Icons.stars_rounded),
               iconSize: 24.0,
               color: Colors.black,
               onPressed: () {
