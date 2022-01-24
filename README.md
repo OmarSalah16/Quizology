@@ -1,4 +1,4 @@
-# opentrivia_quiz_game_final
+# Quizology
 
 A new Flutter project.
 
