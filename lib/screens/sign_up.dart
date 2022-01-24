@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:opentrivia_quiz_game_final/screens/home.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:opentrivia_quiz_game_final/models/user.dart';
+import 'package:opentrivia_quiz_game_final/screens/sign_in.dart';
 
 class RegisterationScreen extends StatefulWidget {
   @override
@@ -282,7 +283,7 @@ class _RegisterationState extends State<RegisterationScreen> {
         .set(userModel.toMap(userModel));
     Fluttertoast.showToast(msg: "Account created successfully :) ");
 
-    Navigator.pushAndRemoveUntil((context),
-        MaterialPageRoute(builder: (context) => Home()), (route) => false);
+    // Navigator.pushReplacement((context), MaterialPageRoute(builder: (context) => Home()));
+    Navigator.pushAndRemoveUntil((context), MaterialPageRoute(builder: (context) => Home()), (route) => false);
   }
 }

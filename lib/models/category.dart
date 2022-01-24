@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Category {
+class Category
+{
   final int id;
   final String name;
   final IconData icon;
 
   Category(this.id, this.name, this.icon);
 
-  List<Category> newlist(List<Category> cat, List<int> favcat) {
-    List<Category> new_list = [];
-    for (var i = 0; i < favcat.length; i++) {
-      if (favcat.contains(i)) {
-        new_list.add(cat[i]);
-      }
-    }
-    return new_list;
-  }
+  // List<Category> newlist(List<Category> cat, List<int> favcat) {
+  //   List<Category> new_list = [];
+  //   for (var i = 0; i < favcat.length; i++) {
+  //     if (favcat.contains(i)) {
+  //       new_list.add(cat[i]);
+  //     }
+  //   }
+  //   return new_list;
+  // }
 }
 
-List<Category> categories = [
+List<Category> categories =
+[
   Category(9, "General Knowledge", FontAwesomeIcons.globeAfrica),
   Category(10, "Books", FontAwesomeIcons.bookOpen),
   Category(11, "Film", FontAwesomeIcons.video),

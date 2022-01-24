@@ -62,8 +62,7 @@ class Answer extends StatelessWidget {
                             fontSize: 17.0,
                           ),
                         ),
-                        correct
-                            ? Container()
+                        correct ? Container()
                             : Text.rich(
                                 TextSpan(
                                   children: [

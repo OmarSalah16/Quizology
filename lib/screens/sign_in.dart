@@ -6,6 +6,7 @@ import 'package:opentrivia_quiz_game_final/screens/home.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:opentrivia_quiz_game_final/screens/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:opentrivia_quiz_game_final/services/storage_service.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
@@ -24,6 +25,9 @@ class _LoginState extends State<Login> {
       String? uid = FirebaseAuth.instance.currentUser!.uid;
 
       await Provider.of<UserProvider>(context, listen: false).readUser();
+      Provider.of<UserProvider>(context, listen: false).getUser.avatarUrl =
+            await StorageRepo().getUserProfileImage(
+                Provider.of<UserProvider>(context, listen: false).getUser.uid);
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (context) => Home()));
     } catch (e) {
@@ -170,6 +174,9 @@ class _LoginState extends State<Login> {
                       MaterialPageRoute(builder: (context) => Home())),
                 });
         await Provider.of<UserProvider>(context, listen: false).readUser();
+        Provider.of<UserProvider>(context, listen: false).getUser.avatarUrl =
+            await StorageRepo().getUserProfileImage(
+                Provider.of<UserProvider>(context, listen: false).getUser.uid);
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
           case "invalid-email":

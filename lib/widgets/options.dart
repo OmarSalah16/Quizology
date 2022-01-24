@@ -15,7 +15,8 @@ import 'package:provider/provider.dart';
 
 import 'custom_action_chip.dart';
 
-class Options extends StatefulWidget {
+class Options extends StatefulWidget
+{
   final Category category;
 
   Options({required this.category});
@@ -49,15 +50,14 @@ class _OptionsState extends State<Options> {
   }
 
   _startQuiz() async {
-    if (this.mounted) {
+    
       setState(() {
         processing = true;
       });
-    }
+
 
     try {
-      List<Question> question =
-          await getQuestions(widget.category, _noOfQuestion, _difficulty);
+      List<Question> question = await getQuestions(widget.category, _noOfQuestion, _difficulty);
       if (question.length < 1) {
         Fluttertoast.showToast(
           backgroundColor: Theme.of(context).primaryColor,

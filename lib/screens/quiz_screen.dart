@@ -7,7 +7,8 @@ import 'package:opentrivia_quiz_game_final/models/question.dart';
 import 'package:opentrivia_quiz_game_final/screens/result_screen.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 
-class Quiz extends StatefulWidget {
+class Quiz extends StatefulWidget
+{
   final List<Question> question;
   final Category category;
   Quiz({required this.category, required this.question});
@@ -16,14 +17,17 @@ class Quiz extends StatefulWidget {
   _QuizState createState() => _QuizState();
 }
 
-class _QuizState extends State<Quiz> {
+class _QuizState extends State<Quiz>
+{
   int _currentIndex = 0;
   final Map<int, dynamic> _answers = {};
   final FlutterTts flutterTts = FlutterTts();
 
   @override
-  Widget build(BuildContext context) {
-    Future speak(String text) async {
+  Widget build(BuildContext context)
+  {
+    Future speak(String text) async
+    {
       await flutterTts.setLanguage("en-US");
       await flutterTts.setVolume(1);
       await flutterTts.setPitch(1);
@@ -34,17 +38,20 @@ class _QuizState extends State<Quiz> {
 
     final List<dynamic> options = question.incorrect_answer;
 
-    if (!options.contains(question.correct_answer)) {
+    if (!options.contains(question.correct_answer))
+    {
       options.add(question.correct_answer);
       options.shuffle();
     }
 
-    return WillPopScope(
+    return WillPopScope
+    (
       onWillPop: _onWillPop,
-      child: Scaffold(
+      child: Scaffold
+      (
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
-          automaticallyImplyLeading: true,
+          // automaticallyImplyLeading: true,
           backgroundColor: Theme.of(context).primaryColor,
           title: Text(widget.category.name),
         ),
@@ -66,8 +73,7 @@ class _QuizState extends State<Quiz> {
                           CountdownTimer(
                             textStyle: TextStyle(fontSize: 25),
                             onEnd: onEnd,
-                            endTime: DateTime.now().millisecondsSinceEpoch +
-                                1000 * 20,
+                            endTime: DateTime.now().millisecondsSinceEpoch + 1000 * 20,
                           ),
                         ],
                       ),
@@ -97,8 +103,7 @@ class _QuizState extends State<Quiz> {
                     SizedBox(width: 20.0),
                     Expanded(
                       child: Text(
-                        HtmlUnescape()
-                            .convert(widget.question[_currentIndex].question),
+                        HtmlUnescape().convert(widget.question[_currentIndex].question),
                         style: TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.w500,
@@ -135,8 +140,7 @@ class _QuizState extends State<Quiz> {
                 SizedBox(height: 25.0),
                 Container(
                   child: ElevatedButton.icon(
-                    onPressed: () => speak(HtmlUnescape()
-                        .convert(widget.question[_currentIndex].question)),
+                    onPressed: () => speak(HtmlUnescape().convert(widget.question[_currentIndex].question)),
                     style: ElevatedButton.styleFrom(primary: Colors.blue[700]),
                     icon: Icon(Icons.volume_up),
                     label: Text("Listen to Question"),
@@ -168,8 +172,7 @@ class _QuizState extends State<Quiz> {
   }
 
   void onEnd() {
-    if (_currentIndex <
-        (widget.question.length - 1)) // If this isn't the last question
+    if (_currentIndex < (widget.question.length - 1)) // If this isn't the last question
     {
       if (_answers[_currentIndex] == null) // If the answer is empty
       {
@@ -227,34 +230,41 @@ class _QuizState extends State<Quiz> {
     }
   }
 
-  Future<bool> _onWillPop() async {
-    return showDialog<bool>(
+  Future<bool> _onWillPop() async
+  {
+    return showDialog<bool>
+    (
       context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: Text(
-            'All your current progress will be lost',
-          ),
-          actions: [
-            TextButton(
-              child: Text(
+      builder: (context)
+      {
+        return AlertDialog
+        (
+          content: Text( 'All your current progress will be lost'),
+          actions:
+          [
+            TextButton
+            (
+              child: Text
+              (
                 'Ok',
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
-              onPressed: () {
+              onPressed: ()
+              {
                 Navigator.of(context).pop(true);
               },
-              style:
-                  TextButton.styleFrom(primary: Theme.of(context).primaryColor),
+              style:TextButton.styleFrom(primary: Theme.of(context).primaryColor),
             ),
-            TextButton(
-              style:
-                  TextButton.styleFrom(primary: Theme.of(context).primaryColor),
-              child: Text(
+            TextButton
+            (
+              style:TextButton.styleFrom(primary: Theme.of(context).primaryColor),
+              child: Text
+              (
                 'Cancel',
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
-              onPressed: () {
+              onPressed: ()
+              {
                 Navigator.of(context).pop(false);
               },
             ),
