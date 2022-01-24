@@ -15,8 +15,7 @@ import 'package:provider/provider.dart';
 
 import 'custom_action_chip.dart';
 
-class Options extends StatefulWidget
-{
+class Options extends StatefulWidget {
   final Category category;
 
   Options({required this.category});
@@ -50,14 +49,13 @@ class _OptionsState extends State<Options> {
   }
 
   _startQuiz() async {
-    
-      setState(() {
-        processing = true;
-      });
-
+    setState(() {
+      processing = true;
+    });
 
     try {
-      List<Question> question = await getQuestions(widget.category, _noOfQuestion, _difficulty);
+      List<Question> question =
+          await getQuestions(widget.category, _noOfQuestion, _difficulty);
       if (question.length < 1) {
         Fluttertoast.showToast(
           backgroundColor: Theme.of(context).primaryColor,
@@ -86,14 +84,12 @@ class _OptionsState extends State<Options> {
       );
       Navigator.pop(context);
     } catch (err) {
-      if (this.mounted) {
-        Fluttertoast.showToast(
-          backgroundColor: Theme.of(context).primaryColor,
-          msg: 'Unexpected Err',
-          gravity: ToastGravity.BOTTOM,
-        );
-        Navigator.pop(context);
-      }
+      Fluttertoast.showToast(
+        backgroundColor: Theme.of(context).primaryColor,
+        msg: 'Unexpected Err',
+        gravity: ToastGravity.BOTTOM,
+      );
+      Navigator.pop(context);
     }
   }
 
@@ -113,24 +109,25 @@ class _OptionsState extends State<Options> {
                   .contains(Provider.of<UserProvider>(context, listen: false)
                       .getUser
                       .currentcategory)) ...[
-                IconButton
-                (
-                  icon: Icon(Icons.star),
-                  iconSize: 24.0,
-                  color: Colors.black,
-                  onPressed: ()
-                  {
-                    setState(()
-                    {
-                      Provider.of<UserProvider>(context, listen: false).getUser.favorites.add(Provider.of<UserProvider>
-                      (
-                        context,
-                        listen: false
-                      ).getUser.currentcategory);
-                      fs.updatefavorites(Provider.of<UserProvider>(context, listen: false).getUser.favorites);
-                    });
-                  }
-                ),
+                IconButton(
+                    icon: Icon(Icons.star),
+                    iconSize: 24.0,
+                    color: Colors.black,
+                    onPressed: () {
+                      setState(() {
+                        Provider.of<UserProvider>(context, listen: false)
+                            .getUser
+                            .favorites
+                            .add(Provider.of<UserProvider>(context,
+                                    listen: false)
+                                .getUser
+                                .currentcategory);
+                        fs.updatefavorites(
+                            Provider.of<UserProvider>(context, listen: false)
+                                .getUser
+                                .favorites);
+                      });
+                    }),
               ] else ...[
                 IconButton(
                   icon: Icon(Icons.star),
@@ -163,19 +160,18 @@ class _OptionsState extends State<Options> {
               ]
             ],
           ),
-          ElevatedButton
-          (
-            child: Text("Go to Favorites"),
-            style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
-              onPressed: ()
-              {
-                setState(()
-                {
-                  Provider.of<UserProvider>(context, listen: false).getUser.favorites;
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => favorites()));
+          ElevatedButton(
+              child: Text("Go to Favorites"),
+              style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+              onPressed: () {
+                setState(() {
+                  Provider.of<UserProvider>(context, listen: false)
+                      .getUser
+                      .favorites;
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => favorites()));
                 });
-              }
-          ),
+              }),
           SizedBox(height: 20.0),
           Text('Select Total No of Question'),
           Wrap(alignment: WrapAlignment.center, spacing: 10.0, children: [
